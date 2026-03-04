@@ -1,0 +1,251 @@
+/* Reset padrão para garantir que o layout ocupe a tela toda */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --linha-vermelha: #b30000;
+    /* O vermelho das divisórias*/
+    --texto-destaque: #ffcc00;
+    /* O amarelo/laranja das letras */
+    --fundo-site: #121212;
+    /* Cinza escuro para o fundo */
+    --fundo-caixa: #1e1e1e;
+    /* Fundo das áreas de texto */
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--fundo-site);
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* --- CABEÇALHO --- */
+.cabeçalho {
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 8px solid var(--linha-vermelha);
+    background-color: var(--fundo-site);
+}
+
+.cabeçalho h1 {
+    color: var(--texto-destaque);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.cabeçalho p {
+    max-width: 800px;
+    margin: 10px auto;
+    color: #cccccc;
+}
+
+/* --- ESTRUTURA GRID (O EMBRULHO) --- */
+.embrulho {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    /* Sidebar fixa em 280px e o resto para o conteúdo */
+    min-height: 100vh;
+}
+
+/* --- SIDEBAR (LISTA LATERAL) --- */
+.sidebar {
+    border-right: 8px solid var(--linha-vermelha);
+    padding: 30px 20px;
+    background-color: var(--fundo-site);
+}
+
+.sidebar nav {
+    position: sticky;
+    top: 30px;
+    /* Faz o menu seguir o scroll */
+}
+
+.sidebar h3 {
+    color: var(--texto-destaque);
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+
+
+.sidebar li {
+    margin-bottom: 15px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: var(--texto-destaque);
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #ffffff;
+    padding-left: 10px;
+}
+
+/* --- CONTEÚDO PRINCIPAL --- */
+.conteudo-principal {
+    padding: 40px;
+    max-width: 1000px;
+}
+
+.aula-secao {
+    margin-bottom: 80px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #333;
+}
+
+.aula-secao h2 {
+    color: var(--texto-destaque);
+    font-size: 2rem;
+    margin-bottom: 25px;
+    border-left: 5px solid var(--linha-vermelha);
+    padding-left: 15px;
+}
+
+.aula-secao p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+#codigo a {
+
+    text-decoration: none;
+    color: var(--texto-destaque);
+    font-weight: bold;
+
+}
+
+#codigo a:hover {
+
+    text-decoration: underline;
+    color: #ffffff
+}
+
+/* --- CAIXAS DE CÓDIGO --- */
+.code-box {
+    background-color: #000000;
+    border: 1px solid #444;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    color: #00ff00;
+    /* Verde estilo terminal para o código */
+    overflow-x: auto;
+}
+
+.code-box code {
+    display: block;
+    line-height: 1.4;
+}
+
+/* --- PLACEHOLDER DE IMAGENS (prints) --- */
+.image-placeholder {
+    background-color: #000;
+    border: 1px solid #333;
+    margin: 25px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.image-placeholder img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+
+i,
+b {
+    color: var(--texto-destaque);
+}
+
+/* Estilização do Formulário de Feedback */
+.form-feedback {
+    background-color: var(--fundo-caixa);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.campo {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label {
+    color: var(--texto-destaque);
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.campo input,
+.campo textarea {
+    background-color: #000;
+    border: 1px solid #444;
+    color: white;
+    padding: 12px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+    outline: none;
+    border-color: var(--linha-vermelha);
+}
+
+.btn-enviar {
+    background-color: var(--linha-vermelha);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.btn-enviar:hover {
+    background-color: var(--texto-destaque);
+    color: black;
+}
+
+
+@media (max-width: 850px) {
+    .embrulho {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        border-right: none;
+        border-bottom: 8px solid var(--linha-vermelha);
+    }
+
+    .sidebar nav {
+        position: relative;
+        top: 0;
+    }
+}

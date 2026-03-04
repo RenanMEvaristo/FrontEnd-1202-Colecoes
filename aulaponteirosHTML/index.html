@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AULA: Lógica de Ponteiros em C</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+    <header id="intro" class="cabeçalho">
+
+        <h1>Explorando Ponteiros e Matrizes em C</h1>
+        <p>Aprenda alocação dinâmica e aritmética de memória</p>
+        <p>Na aula de hoje faremos um programa, onde vamos criar uma
+            matriz de 3x3, com memória dinâmica e preenchimento automático,
+            para calcular a soma de todas as bordas da matriz.
+        </p>
+
+
+
+
+
+    </header>
+
+
+    <div class="embrulho">
+
+        <aside class="sidebar">
+
+            <nav>
+
+                <h3>Tópicos da Aula</h3>
+
+                <ul>
+
+                    <li><a href="#intro">Introdução</a></li>
+                    <li><a href="#struct">Criar Struct</a></li>
+                    <li><a href="#preencher">preencherMatriz()</a></li>
+                    <li><a href="#bordas">Função somarBordas</a></li>
+                    <li><a href="#exibir">Função exibirMatriz</a></li>
+                    <li><a href="#main">int main()</a></li>
+                    <li><a href="#malloc">Alocação malloc()</a></li>
+                    <li><a href="#free">Liberando Memória</a></li>
+                    <li><a href="#codigo">Código Completo</a></li>
+                    <li><a href="#feedback">Avaliação</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+
+
+
+
+
+        <main class="conteudo-principal">
+
+            <section id="main" class="aula-secao">
+
+                <section id="struct" class="aula-secao">
+
+
+                    <h2>Criação da <i>STRUCT</i>, que será nossa base neste exercício:</h2>
+
+                    <div class="image-placeholder">
+
+                        <img src="structMapaMatriz.png">
+
+                    </div>
+
+                    <div class="code-box">
+
+
+                        <code>struct MapaMatriz
+                {
+                        int *inicio_memoria;
+                        int total_linhas;
+                        int total_colunas;
+                };</code>
+
+                    </div>
+
+
+
+                </section>
+
+                <section id="preencher" class="aula-secao">
+
+
+
+                    <h2>Agora construimos uma função VOID preencherMatriz()(onde não há retorno de elementos)</h2>
+
+
+                    <div class="image-placeholder">
+
+                        <img src="preencherMatriz.png">
+
+                    </div>
+
+                    <p>Para o preenchimento automatico da struct *matriz, com numeros inteiros crescentes de 0 a 8,
+                        sendo a matriz 3x3 = 9 elementos.
+                    </p>
+                    <p>Dentro desta função recebemos os argumentos (struct MapaMatriz *matriz)</p>
+                    <p>O que isso significa?</p>
+                    <p>A função espera receber um argumento do tipo <i>struct</i> nomeado com MapaMatriz, e damos o nome
+                        desse argumento de *matriz, sempre adicionando o *(ponteiro)</p>
+                    <p>Assim voce diz para o sistema que agora essa <i>struct</i> é um ponteiro.</p>
+                    <p>No fim, estamos dizendo que, cada <i>LINHA</i> vai receber o valor da variavel <i>INT LINHAS</i>,
+                        que
+                        é um iterador dentro do laço <B>FOR</B>.</p>
+
+                </section>
+
+
+                <section id="bordas" class="aula-secao">
+
+
+
+
+                    <h2>Calculo para Soma de Bordas</h2>
+
+
+                    <p>Agora para os Calculos, precisamos percorrer toda a *matriz, por isso utilizamos 2 laços
+                        <b>FOR</b>.
+                    </p>
+                    <p>No primeiro laço <b>FOR</b>, podemos observar que estamos usando:</p>
+                    <div class="code-box">
+
+                        <code> (int linhas = 0; linhas < matriz->total_linhas, linhas++); </code>
+
+                    </div>
+
+                    <p>Quando dizemos que <b> (linhas < matriz->total_linhas; linhas++)</b>,
+                        esse valor <i>total_linhas</i>, vem de dentro da <i>struct MapaMatriz</i>, que colocamos como
+                        argumento.
+                    </p>
+                    <p>Após o primeiro laço <b>FOR</b>, que foi usado para percorrer as <b>LINHAS</b> da matriz, agora
+                        precisamos
+                        criar um outro laço de repetição, para percorrer as <b>COLUNAS</b>
+                        e neste exmeplo foi usado como <b>(colunas = 0; colunas < matriz->total_colunas; colunas++)</b>
+                    </p>
+                    <p>Perceba que neste segundo laço <b>FOR</b> utilizamos a variavel <i>total_colunas</i>
+                        para percorrer toda a coluna. </p>
+                    <p>Agora utilizamos a condicional <b>IF</b>.</p>
+                    <div class="code-box">
+
+                        <code>if(linhas == 0 || linhas == matriz->total_linhas - 1 || colunas == 0 || colunas == matriz->total_colunas - 1);</code>
+
+                    </div>
+                    <p>Simbolo == referente a <i>igualdade</i></p>
+                    <p>Simbolo || referente a <i>OU</i></p>
+                    <p>Passando para a linguagem "humana" esse <b>IF</b> representa o seguinte:</p>
+                    <p><i>SE</i>(LINHAS for igual a 0 <I>OU</I> linhas for igual a TOTAL_LINHAS
+                        - 1 <i>OU</i> colunas <i>==</i> 0 <i>OU</i> total_colunas - 1)</p>
+                    <p>Colocamos o <i>-1</i> por que se a matriz tem 3 linhas, os indices são
+                        <i>0, 1, 2</i>. Portanto, o limite é 3-1 = <i>2</i> (numero de indices).
+                    </p>
+                    <p>Agora vamos para a parte importante, o cálculo da soma das bordas da matriz!</p>
+                    <p>Para fazer a soma dos valores, primeiros precisamos criar uma variavel do tipo INT, que
+                        chamaremos
+                        de:</p>
+
+                    <div class="image-placeholder">
+
+                        <img src="somarBordas.png">
+
+                    </div>
+
+
+                    <div class="code-box">
+                        <code>int soma = 0;</code>
+                    </div>
+                    <p>Note que também já inicializamos a variavel com o valor de <i>0</i></p>
+                    <p>Como já fizemos 2 laços de repetição <B>FOR(LINHAS, COLUNAS)</B>
+                        para percorrer as linhas e colunas da matriz, precisamos agora criar uma outra variável
+                        para receber o valor do cálculo, neste exemplo iremos criar a variavel:</p>
+
+                    <div class="code-box">
+                        <code>int soma_valor;</code>
+                    </div>
+                    <p>Agora dentro da condicional <b>IF</b> temos:</p>
+
+                    <div class="code-box">
+
+                        <code>int valor_atual = *(matriz->inicio_memoria + (linhas * matriz->total_colunas) + colunas);</code>
+
+                    </div>
+
+                    <p>Vamos entender por partes:</p>
+                    <p>Criamos a variavel valor_atual para receber o valor do cálculo que sera apresentado
+                        :
+                    <div class="code-box">
+
+                        <code>int valor_atual</code>
+
+                    </div>
+                    </p>
+
+                    <div class="code-box">
+
+                        <code>*(matriz->inicio_memoria)</code>
+
+                    </div>
+                    <p>Aqui estamos dizendo para o sistema: Entre no ponteiro *(matriz->inicio_memoria), e nos
+                        traga o endereço de memoria, onde se inicia a <i>Fita</i> de memória com os endereços salvos.
+
+                    </p>
+
+                    <p>Então diremos que o endereço de memória inicial será 0x100(apenas para entendimento do exemplo)
+                    </p>
+
+                    <div class="code-box">
+
+                        <code>((linhas * matriz->total_colunas) + colunas)</code>
+                    </div>
+
+                    <p>Aqui estamos dizendo que o valor de <i>LINHAS</i> será multiplicado pelo <i>total_colunas</i>.
+                        Mas por que isso?</p>
+
+                    <p>Imagine que a memória é uma fila única de cadeiras (uma fita). Se cada linha da sua matriz
+                        tem 3 cadeiras, para chegar na <i>segunda linha</i>, você precisa 'pular' as 3 cadeiras da
+                        primeira linha.
+                    </p>
+                    <p>Por Isso fazemos: <i>linhas * total_colunas;</i></p>
+                    <p>E por que esse <i>+COLUNAS</i> no final?</p>
+
+                    <p>Após o cálculo anterior ter te levado até a 'porta' da linha correta, o <i>+ COLUNAS</i>
+                        diz quantos passos você deve dar para a direita dentro dessa linha para encontrar o elemento
+                        exato.</p>
+
+                    <p>É como um endereço de GPS:</p>
+
+                    <ul>
+
+                        <li><i>(linhas * total_colunas)</i> te leva até o <b>ANDAR</b> correto<i>(linha)</i></li>
+                        <li><i>+ COLUNAS</i> te leva até o <b>número do apartamento</b> coluna</li>
+
+                    </ul>
+
+                    <div class="image-placeholder">
+
+                        <img src="fitamemoriaRam.png">
+
+                    </div>
+
+
+                    <div class="code-box">
+
+                        <code>printf("Somando a borda [%d] [%d]: [%d], linhas, colunas, valor_atual)</code>
+
+                    </div>
+
+                    <p>Simbolo %d refere a impressão de numeros inteiros(INT).</p>
+                    <p>Após o fechamento da string(" "), colocamos o nome das variáveis que substituirão os simbolos %d,
+                        que neste exemplo serão, o valor do iterador <I>LINHAS</I> e do iterador <i>COLUNAS</i>, e o
+                        valor
+                        da variavel <i>valor_atual</i>
+                        que criamos anteriormente
+                    </p>
+                    <p>E para finalizar essa sessão, temos o codigo:</p>
+
+                    <div class="code-box">
+
+                        <code>soma += valor_atual</code>
+
+                        <code>soma = soma + valor_atual</code>
+
+                    </div>
+
+                    <p>Que também pode ser lido como:</p>
+
+                    <div class="code-box">
+
+                        <code>soma = soma + valor_atual</code>
+
+                    </div>
+                    <p>Entao entendemos que a variavel <i>soma</i> foi inicializada com o valor <i>0</i>
+
+                    </p>
+                    <p>Se a variavel <i>valor_atual</i> estiver valendo 2 entao o calculo ficaria:</p>
+
+                    <div class="code-box">
+
+                        <code>0 = 0 + 2</code>
+                        <p> soma = soma + valor_atual</p>
+                    </div>
+
+                    <p>A partir deste momento a variavel <i>soma</i> passa a ter o valor de <i>2</i>
+                    </p>
+                    <p>Seguindo para o proximo loop, digamos que o valor de <i>valor_atual</i> agora é <i>3</i></p>
+
+                    <div class="code-box">
+
+                        <code>2 = 2 + 3</code>
+                        <p> soma = soma + 3</p>
+
+
+                    </div>
+                    <p>A partir disso, <i>soma</i> agora vale <i>5.</i></p>
+                    <p>Agora precisamos usar o comando:</p>
+
+                    <div class="code-box">
+
+                        <code> return soma;</code>
+
+                    </div>
+
+                    <p>Dizendo ao sistema para retornar o valor INT guardado dentro da variavel
+                        <i>SOMA</i>.(Que neste exemplo teria o valor de <i>5</i>)
+                    </p>
+                </section>
+
+
+                <section id="exibir" class="aula-secao">
+
+
+
+                    <h2>Função para Exibir a Matriz</h2>
+                    <p>Agora criamos uma outra função, chamada exibirMatriz();</p>
+
+                    <div class="image-placeholder">
+
+                        <img src="exibirMatriz.png">
+
+                    </div>
+
+                    <div class="code-box">
+
+                        <code>void exibirMatriz(struct MapaMatriz *matriz);</code>
+
+
+                    </div>
+
+                    <p>Toda função começando com <i>VOID</i>, significa que não haverá retorno de
+                        elementos da função, diferente da função <i>somarBordas</i>, onde esperamos um retorno de um
+                        INT.
+                    </p>
+                    <p>Nesta função também utilizaremos 2 loops <b>FOR</b>, com iteradores <i>LINHAS e COLUNAS</i>, em
+                        seguida
+                        usamos o comando <i>PRINTF</i> para mostrar na tela os valores guardados na matriz.</p>
+
+                    <div class="code-box">
+                        <code>printf("%3d", *(matriz->inicio_memoria + (linha * matriz->total_colunas) + coluna));</code>
+
+                    </div>
+
+                    <p>"%3d significa que todos os numeros impressos, mesmo com 1 ou 2 digitos,
+                        terão o espaço de 3 caracteres entre eles, deixando a tabela alinhada
+                        e facilitando a visualização. </p>
+
+
+                </section>
+
+                <h2>O coração do Sistema: int main()</h2>
+                <p>Aqui começaços criando uma nova variável do tipo
+                    STRUCT MapaMatriz com o nome de nova_matriz
+                </p>
+
+                <div class="image-placeholder">
+
+                    <img src="varStruct.png">
+
+                </div>
+
+                <div class="code-box">
+
+                    <code>struct MapaMatriz nova_matriz;</code>
+
+                </div>
+
+                <p>Agora vamos dizer para o sistema, qual o tamanho da nossa matriz:</p>
+
+                <div class="code-box">
+
+                    <code>nova_matriz.total_linhas = 3;</code><br>
+                    <code>nova_matriz.total_colunas = 3;</code>
+
+                </div>
+
+                <div class="image-placeholder">
+
+                    <img src="nvTotal.png">
+
+                </div>
+
+                <p>Em seguida precisamos criar uma variavel auxiliar para guardar o tamanho da matriz:</p>
+
+                <div class="image-placeholder">
+
+                    <img src="tamanhototal.png">
+
+                </div>
+
+                <div class="code-box">
+
+                    <code>int tamanho_total = nova_matriz.total_linhas * nova_matriz.total_colunas;</code>
+
+                </div>
+
+
+
+
+            </section>
+
+
+
+            <section id="malloc" class="aula-secao">
+
+                <h2>Alocação Dinâmica com malloc()</h2>
+                <p>O próximo passo é alocar um espaço de memória.</p>
+                <p>Segue o código:</p>
+
+                <div class="image-placeholder">
+
+                    <img src="malloc.png">
+
+                </div>
+
+                <div class="code-box">
+
+                    <code>nova_matriz.inicio_memoria = (int *)malloc(tamanho_total * sizeof(int));</code>
+
+                </div>
+
+                <p>O que este código signfica?</p>
+                <p>A <i>struct</i> nova_matriz.inicio_memoria estará recebendo um ponteiro de um numero inteiro(int *),
+                    o <i>malloc</i>(Memory Allocation) é a função que reserva o espaço de memória
+                    onde os dados da nossa matriz serão guardados.</p>
+                <p>E o último calculo:</p>
+
+                <div class="code-box">
+                    <code>(tamanho_total * sizeof(int))</code>
+                </div>
+
+                <p>Funciona da seguinte forma: Vimos que o 'tamanho_total' é 9. A função sizeof(int)
+                    verifica o tamanho de um inteiro no sistema(que geralmente é de 4 bytes), então o calculo pode se
+                    traduzir para ->
+                </p>
+
+                <div class="code-box">
+
+                    <code>(tamanho_total * sizeof(int)) == (9*4)</code>
+
+                </div>
+
+                <p>Com esse cálculo recebemos o retorno de 36, o sistema entende que
+                    ele tem que separar 36 bytes de memória para a <i>struct</i>
+                </p>
+
+
+
+            </section>
+
+
+
+
+
+            <section id="free" class="aula-secao">
+
+                <div clas="image-placeholder">
+
+
+                    <img src="returnsoma.png">
+
+                </div>
+
+
+                <p>Para finalizar o sistema sem erros, precisamos liberar o espaço da memoria alocada,
+                    entao usamos a função:
+                </p>
+
+                <div class="code-box">
+
+                    <code>free();</code>
+
+                </div>
+
+                <p>E como usaremos esta função, precisamos passar um argumento para ela,
+                    de qual alocação ela irá liberar a memória:
+                </p>
+
+                <div class="code-box">
+
+                    <code>free(nova_matriz.inicio_memoria);</code>
+
+                </div>
+
+
+                <p>O sistema entende que, a partir do <i>inicio_memoria</i> ele pode liberar todo o espaço,
+                    evitando o erro <i>MEMORY LEAK</i>(vazamento de memória)</p>
+                <p>Após liberar a memória, finalizamoso sistema com o codigo:</p>]
+
+                <div class="code-box">
+
+
+                    <code>system("pause")</code>
+                    <code>return 0;</code>
+                </div>
+
+                <p>Temos que por o <i>return 0;</i>, pois a <i>MAIN</i>, é uma função
+                    <i>INT</i>, então temos que retornar um inteiro.
+                </p>
+
+            </section>
+
+            <section id="codigo" class="aula-secao">
+
+                <a href="https://github.com/RenanMEvaristo/Codigo-Aula-Ponteiros/blob/main/somarbordasmatriz.c">Confira
+                    o código completo no Link!</a>
+
+
+            </section>
+
+
+            <section id="feedback" class="aula-secao">
+                <h2>Avalie esta Aula</h2>
+                <p>Sua opinião é fundamental para melhorar este conteúdo didático!</p>
+
+                <!-- Substitua o link abaixo pelo link que você copiou do Formspree -->
+                <form action="https://formspree.io/f/mnjbkjpj" method="POST" class="form-feedback">
+
+                    <div class="campo">
+                        <label for="nota">Nota da Aula (0 a 10):</label>
+                        <input type="number" id="nota" name="nota" min="0" max="10" required placeholder="Ex: 10">
+                    </div>
+
+                    <div class="campo">
+                        <label for="comentario">O que você achou da explicação?</label>
+                        <textarea id="comentario" name="feedback" rows="5" required
+                            placeholder="Deixe seu comentário aqui..."></textarea>
+                    </div>
+
+                    <!-- Opcional: Campo para o e-mail do visitante se você quiser responder -->
+                    <div class="campo">
+                        <label for="email">Seu e-mail (opcional):</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com">
+                    </div>
+
+                    <button type="submit" class="btn-enviar">Enviar Avaliação</button>
+                </form>
+            </section>
+
+        </main>
+
+</body>
+
+</html>
