@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+
+            background-color: #f0f2f5;
+            font-family: sans-serif;
+        }
+
+        .cartao-conteudo {
+
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+
+        }
+
+        h3 {
+
+            font-size: 28px;
+            font-weight: bold;
+            color: #1a73e8;
+
+        }
+
+        nav {
+
+            text-align: center;
+            background: #1a73e8;
+            padding: 15px;
+
+        }
+
+        nav a {
+
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+
+        }
+
+        p {
+
+            color: #555;
+            line-height: 1.6;
+
+        }
+
+        .area-botao {
+
+            text-align: center;
+            margin: 30px 0;
+
+        }
+
+        #btn-tabela {
+
+            background-color: #1a73e8;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+
+        }
+
+        #btn-tabela:hover {
+
+            background-color: #1557b0;
+
+        }
+
+        #btn-tabela:disabled {
+
+            background-color: #ccc;
+            cursor: not-allowed;
+
+        }
+
+        #container-imagem {
+
+            text-align: center;
+            margin-bottom: 50px;
+
+        }
+
+        #container-imagem img {
+
+            max-width: 90%;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 5px solid white;
+        }
+    </style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+    <nav>
+
+        <a href="#organizacao">Organização e Sedes</a>
+        <a href="#formato">Novo Formato</a>
+        <a href="#expectativa">Expectativas e Impacto</a>
+
+    </nav>
+
+    <section id="organizacao" class="cartao-conteudo">
+
+        <h3>Organização e Sedes</h3>
+        <p>A Copa do Mundo FIFA de 2026 será a primeira edição
+            realizada em três países: Estados Unidos, Canadá e México. Essa será também a maior Copa da história em
+            número de cidades-sede, com partidas distribuídas por diversas regiões da América do Norte,
+            ampliando o alcance global do torneio.
+        </p>
+
+    </section>
+
+    <section id="formato" class="cartao-conteudo">
+
+        <h3>Novo Formato</h3>
+        <p>O torneio contará com 48 seleções, em vez das tradicionais 32. As equipes serão divididas em grupos,
+            aumentando o número total de jogos e dando mais oportunidades para países de diferentes continentes
+            participarem. Essa mudança foi promovida pela
+            FIFA para tornar a competição mais inclusiva e competitiva.</p>
+
+    </section>
+
+    <section id="expectativa" class="cartao-conteudo">
+
+
+        <h3>Expectativas e Impacto</h3>
+        <p>
+            A edição de 2026 promete ser uma das mais assistidas da
+            história, com grande impacto econômico e cultural nos países-sede. Além disso, seleções tradicionais e
+            emergentes devem protagonizar jogos de alto nível, aumentando ainda mais o interesse global pelo futebol e
+            fortalecendo o esporte em novas regiões.
+        </p>
+
+    </section>
+
+    <div class="area-botao">
+
+        <button id="btn-tabela" onclick="mostrarTabela()">Mostrar tabela de Jogos</button>
+
+    </div>
+
+    <div id="container-imagem"></div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
