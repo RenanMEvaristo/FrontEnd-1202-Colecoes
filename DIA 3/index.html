@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Copa do Mundo 2026</title>
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        nav {
+            background: #2c3e50;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .cartao-secao {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 0 auto 25px auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+        }
+
+        .cartao-secao h3 {
+            font-size: 24px;
+            color: #3498db;
+            margin-top: 0;
+            border-bottom: 2px solid #f0f4f8;
+            padding-bottom: 10px;
+        }
+
+        p {
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        #btn-tabela {
+            background-color: #3498db;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #btn-tabela:hover {
+            background-color: #2980b9;
+        }
+
+        #btn-tabela:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="#organizacao">Organização</a>
+        <a href="#formato">Novo Formato</a>
+        <a href="#expectativas">Expectativas</a>
+    </nav>
+
+    <main>
+        <section id="organizacao" class="cartao-secao">
+            <h3>🌍 Organização e Sedes</h3>
+            <p>
+                A Copa do Mundo FIFA de 2026 será a primeira edição realizada em três países: Estados Unidos, Canadá e
+                México.
+                Essa será também a maior Copa da história em número de cidades-sede, com partidas distribuídas por
+                diversas
+                regiões da América do Norte, ampliando o alcance global do torneio.
+            </p>
+        </section>
+
+        <section id="formato" class="cartao-secao">
+            <h3>⚽ Novo Formato</h3>
+            <p>
+                O torneio contará com 48 seleções, em vez das tradicionais 32. As equipes serão divididas em grupos,
+                aumentando o número total de jogos e dando mais oportunidades para países de diferentes continentes
+                participarem.
+                Essa mudança foi promovida pela FIFA para tornar a competição mais inclusiva e competitiva.
+            </p>
+        </section>
+
+        <section id="expectativas" class="cartao-secao">
+            <h3>🏆 Expectativas e Impacto</h3>
+            <p>
+                A edição de 2026 promete ser uma das mais assistidas da história, com grande impacto econômico e
+                cultural nos países-sede.
+                Além disso, seleções tradicionais e emergentes devem protagonizar jogos de alto nível, aumentando ainda
+                mais o interesse
+                global pelo futebol e fortalecendo o esporte em novas regiões.
+            </p>
+        </section>
+    </main>
+
+
+    <div style="text-align: center; margin: 30px 0;">
+        <button id="btn-tabela" onclick="mostrarTabela()">Mostrar Tabela de Jogos</button>
+    </div>
+
+    <div id="container-imagem" style="text-align: center; margin-bottom: 50px;"></div>
+
+    <script src="script03.js"></script>
+</body>
+
+</html>
