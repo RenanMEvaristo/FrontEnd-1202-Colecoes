@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Média Escolar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cartao {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .cartao h2 {
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        .grupo-input {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .grupo-input label {
+            display: block;
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ced4da;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #0d6efd;
+        }
+
+        .notas-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #212529;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #495057;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            display: none;
+        }
+
+        .aprovado {
+            background-color: #cfe2ff;
+            color: #084298;
+            border: 1px solid #b6d4fe;
+        }
+
+        .exame {
+            background-color: #d1e7dd;
+            color: #0f5132;
+            border: 1px solid #badbcc;
+        }
+
+        .reprovado {
+            background-color: #f8d7da;
+            color: #842029;
+            border: 1px solid #f5c2c7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cartao">
+        <h2>Boletim Escolar</h2>
+
+        <div class="grupo-input">
+            <label>Nome do Aluno</label>
+            <input type="text" id="nomeAluno" placeholder="Ex: João Silva">
+        </div>
+
+        <div class="grupo-input">
+            <label>Notas (0 a 10)</label>
+            <div class="notas-container">
+                <input type="number" id="nota1" step="0.1" min="0" max="10" placeholder="Nota 1">
+                <input type="number" id="nota2" step="0.1" min="0" max="10" placeholder="Nota 2">
+                <input type="number" id="nota3" step="0.1" min="0" max="10" placeholder="Nota 3">
+            </div>
+        </div>
+
+        <button id="btnCalcular">Calcular Média</button>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

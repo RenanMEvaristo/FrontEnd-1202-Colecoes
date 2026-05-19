@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Validador de CPF</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #e9ecef;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cartao {
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .cartao h2 {
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #ced4da;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #0d6efd;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0b5ed7;
+        }
+
+        p#resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            min-height: 24px;
+        }
+
+        .valido {
+            color: #198754;
+            font-weight: bold;
+        }
+
+        .invalido {
+            color: #dc3545;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cartao">
+        <h2>Validador de CPF</h2>
+        <input type="text" id="cpfInput" placeholder="Ex: 123.456.789-00">
+        <button onclick="verificarCPF()">Validar Documento</button>
+        <p id="resultado"></p>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

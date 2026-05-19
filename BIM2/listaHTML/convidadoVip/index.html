@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista VIP - Infinity Bank</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .cartao {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h2 {
+            color: #0f172a;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #3b82f6;
+        }
+
+        button.btn-add {
+            padding: 12px 20px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button.btn-add:hover {
+            background-color: #2563eb;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        .nome-convidado {
+            font-size: 16px;
+            color: #334155;
+            transition: 0.3s;
+            word-break: break-all;
+            margin-right: 15px;
+        }
+
+        .classe-riscado {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+
+        .botoes-acao {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        button.btn-acao {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+        }
+
+        .btn-concluir {
+            background-color: #10b981;
+        }
+
+        .btn-concluir:hover {
+            background-color: #059669;
+        }
+
+        .btn-editar {
+            background-color: #f59e0b;
+        }
+
+        .btn-editar:hover {
+            background-color: #d97706;
+        }
+
+        .btn-excluir {
+            background-color: #ef4444;
+        }
+
+        .btn-excluir:hover {
+            background-color: #dc2626;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cartao">
+        <h2>Infinity Bank - Convidados VIP</h2>
+
+        <div class="input-group">
+            <input type="text" id="inputNome" placeholder="Nome do convidado...">
+            <button class="btn-add" id="btnAdicionar">Adicionar</button>
+        </div>
+
+        <ul id="listaConvidados"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
