@@ -4,34 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termo Clone - React</title>
-    <!-- Bibliotecas do React via CDN -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Bibliotecas do React via CDN (Versões estáveis) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    
     <!-- Babel para traduzir JSX no navegador -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.22.20/babel.min.js"></script>
     
     <style>
-        body { font-family: sans-serif; background-color: #6e5c62; color: white; margin: 0; }
-        .jogo-container { display: flex; flex-direction: column; align-items: center; padding-top: 30px; }
-        .grade { display: grid; gap: 8px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #615458; color: white; margin: 0; display: flex; justify-content: center; }
+        .jogo-container { display: flex; flex-direction: column; align-items: center; padding-top: 30px; width: 100%; }
+        .grade { display: grid; gap: 8px; margin-top: 20px; }
         .linha { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
         .quadrado {
-            width: 55px; height: 55px; border: 3px solid #4c4347;
+            width: 55px; height: 55px; border: 2px solid #4c4347;
             display: flex; justify-content: center; align-items: center;
             font-size: 2rem; font-weight: bold; text-transform: uppercase;
-            border-radius: 4px;
+            border-radius: 4px; background-color: #615458;
         }
         /* Cores oficiais do Termo */
-        .correta { background-color: #3aa394; border-color: #3aa394; }
-        .lugar-errado { background-color: #d3ad69; border-color: #d3ad69; }
-        .errada { background-color: #312a2c; border-color: #312a2c; }
-        h1 { margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        button { margin-top: 20px; padding: 10px 20px; font-size: 1rem; cursor: pointer; border-radius: 5px; border: none; background: white; color: #333; font-weight: bold; }
+        .correta { background-color: #3aa394 !important; border-color: #3aa394 !important; }
+        .lugar-errado { background-color: #d3ad69 !important; border-color: #d3ad69 !important; }
+        .errada { background-color: #312a2c !important; border-color: #312a2c !important; }
+        
+        h1 { margin: 0; letter-spacing: 4px; }
+        .mensagem { margin-top: 20px; font-weight: bold; height: 30px; color: #fff; }
+        button { margin-top: 20px; padding: 10px 25px; font-size: 1rem; cursor: pointer; border-radius: 5px; border: none; background: #3aa394; color: white; font-weight: bold; }
+        button:hover { background: #45bbaa; }
     </style>
 </head>
 <body>
     <div id="root"></div>
 
+    <!-- O tipo precisa ser text/babel para o script ser processado -->
     <script type="text/babel">
         const { useState, useEffect } = React;
 
@@ -41,24 +47,24 @@
             const [tentativas, setTentativas] = useState(Array(6).fill(""));
             const [tentativaAtual, setTentativaAtual] = useState(0);
             const [digitando, setDigitando] = useState("");
-            const [venceu, setVenceu] = useState(false);
+            const [statusJogo, setStatusJogo] = useState("jogando"); // 'jogando', 'venceu', 'perdeu'
 
             useEffect(() => {
                 function handleKeyDown(e) {
-                    if (venceu || tentativaAtual >= 6) return;
+                    if (statusJogo !== "jogando" || tentativaAtual >= 6) return;
 
                     if (e.key === "Enter") {
                         if (digitando.length === 5) conferirTentativa();
                     } else if (e.key === "Backspace") {
                         setDigitando(prev => prev.slice(0, -1));
-                    } else if (digitando.length < 5 && e.key.match(/^[a-z]$/i)) {
+                    } else if (digitando.length < 5 && /^[a-zA-Z]$/.test(e.key)) {
                         setDigitando(prev => (prev + e.key).toUpperCase());
                     }
                 }
 
                 window.addEventListener("keydown", handleKeyDown);
                 return () => window.removeEventListener("keydown", handleKeyDown);
-            }, [digitando, venceu, tentativaAtual]);
+            }, [digitando, statusJogo, tentativaAtual]);
 
             function conferirTentativa() {
                 const novasTentativas = [...tentativas];
@@ -66,9 +72,9 @@
                 setTentativas(novasTentativas);
 
                 if (digitando === PALAVRA_CORRETA) {
-                    setVenceu(true);
+                    setStatusJogo("venceu");
                 } else if (tentativaAtual === 5) {
-                    setTimeout(() => alert("Fim de jogo! A palavra era " + PALAVRA_CORRETA), 100);
+                    setStatusJogo("perdeu");
                 }
 
                 setTentativaAtual(prev => prev + 1);
@@ -77,26 +83,38 @@
 
             return (
                 <div className="jogo-container">
-                    <h1>TERMO CLONE 🧩</h1>
+                    <h1>TERMO</h1>
+                    <div className="mensagem">
+                        {statusJogo === "venceu" && "PARABÉNS! VOCÊ ACERTOU! 🎉"}
+                        {statusJogo === "perdeu" && `FIM DE JOGO! PALAVRA: ${PALAVRA_CORRETA}`}
+                    </div>
+                    
                     <div className="grade">
-                        {tentativas.map((palavra, i) => (
+                        {tentativas.map((palavraGravada, i) => (
                             <div key={i} className="linha">
-                                {(i === tentativaAtual ? digitando.padEnd(5, " ") : palavra.padEnd(5, " "))
+                                {(i === tentativaAtual ? digitando.padEnd(5, " ") : palavraGravada.padEnd(5, " "))
                                     .split("").map((letra, j) => {
                                         let cor = "";
+                                        // Só colorimos linhas que já foram enviadas (i < tentativaAtual)
                                         if (i < tentativaAtual) {
                                             if (letra === PALAVRA_CORRETA[j]) cor = "correta";
                                             else if (PALAVRA_CORRETA.includes(letra)) cor = "lugar-errado";
                                             else cor = "errada";
                                         }
-                                        return <div key={j} className={`quadrado ${cor}`}>{letra !== " " ? letra : ""}</div>
+                                        return (
+                                            <div key={j} className={`quadrado ${cor}`}>
+                                                {letra !== " " ? letra : ""}
+                                            </div>
+                                        )
                                     })
                                 }
                             </div>
                         ))}
                     </div>
-                    {venceu && <h2>VOCÊ VENCEU! 🎉</h2>}
-                    {(venceu || tentativaAtual >= 6) && <button onClick={() => window.location.reload()}>Novo Jogo</button>}
+
+                    {statusJogo !== "jogando" && (
+                        <button onClick={() => window.location.reload()}>JOGAR NOVAMENTE</button>
+                    )}
                 </div>
             );
         }
